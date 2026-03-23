@@ -8,7 +8,7 @@
         <a-descriptions-item label="DB">{{ status.details?.db }}</a-descriptions-item>
         <a-descriptions-item label="Redis">{{ status.details?.redis }}</a-descriptions-item>
         <a-descriptions-item label="Status">
-          <a-tag color="green">{{ status.status }}</a-tag>
+          <a-tag color="var(--color-success)">{{ status.status }}</a-tag>
         </a-descriptions-item>
       </a-descriptions>
     </a-card>

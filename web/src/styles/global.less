@@ -238,10 +238,13 @@ h1, h2, h3, h4, h5, h6 {
   border-inline-end: none !important;
   font-family: var(--font-family-mono);
 
+  // Remove the problematic overrides that break internal layout padding
   .ant-menu-item {
     border-radius: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    width: calc(100% - 8px) !important;
+    margin-left: 4px !important;
     
     &:hover {
       color: var(--color-primary) !important;
@@ -250,12 +253,18 @@ h1, h2, h3, h4, h5, h6 {
     &-selected {
       background: rgba(var(--color-primary), 0.1) !important;
       color: var(--color-primary) !important;
-      border-right: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary) !important;
       text-shadow: 0 0 5px var(--color-primary);
     }
   }
   
   .ant-menu-submenu-title {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    width: calc(100% - 8px) !important;
+    margin-left: 4px !important;
+    border-radius: 0 !important;
+
     &:hover {
       color: var(--color-primary) !important;
     }

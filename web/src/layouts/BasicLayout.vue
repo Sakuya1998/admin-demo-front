@@ -23,49 +23,65 @@
           <template #icon>
             <dashboard-outlined />
           </template>
-          <span>{{ t('system.dashboard') }}</span>
+          {{ t('system.dashboard') }}
         </a-menu-item>
         <a-sub-menu key="system">
-          <template #title>
-            <span>
-              <setting-outlined />
-              <span>{{ t('system.management') }}</span>
-            </span>
+          <template #icon>
+            <setting-outlined />
           </template>
-          <a-menu-item key="users">{{ t('system.userMgmt') }}</a-menu-item>
-          <a-menu-item key="roles">{{ t('system.roleMgmt') }}</a-menu-item>
-          <a-menu-item key="groups">{{ t('system.groupMgmt') }}</a-menu-item>
-          <a-menu-item key="menus">{{ t('system.menuMgmt') }}</a-menu-item>
-          <a-menu-item key="permissions">{{ t('system.permMgmt') }}</a-menu-item>
-          <a-menu-item key="dicts">{{ t('system.dictMgmt') }}</a-menu-item>
-          <a-menu-item key="configs">{{ t('system.sysConfig') }}</a-menu-item>
-          <a-menu-item key="files">{{ t('system.fileMgmt') }}</a-menu-item>
+          <template #title>{{ t('system.management') }}</template>
+          <a-menu-item key="users">
+            <template #icon><user-outlined /></template>
+            {{ t('system.userMgmt') }}
+          </a-menu-item>
+          <a-menu-item key="roles">
+            <template #icon><team-outlined /></template>
+            {{ t('system.roleMgmt') }}
+          </a-menu-item>
+          <a-menu-item key="groups">
+            <template #icon><apartment-outlined /></template>
+            {{ t('system.groupMgmt') }}
+          </a-menu-item>
+          <a-menu-item key="menus">
+            <template #icon><menu-outlined /></template>
+            {{ t('system.menuMgmt') }}
+          </a-menu-item>
+          <a-menu-item key="permissions">
+            <template #icon><safety-certificate-outlined /></template>
+            {{ t('system.permMgmt') }}
+          </a-menu-item>
+          <a-menu-item key="dicts">
+            <template #icon><book-outlined /></template>
+            {{ t('system.dictMgmt') }}
+          </a-menu-item>
+          <a-menu-item key="configs">
+            <template #icon><tool-outlined /></template>
+            {{ t('system.sysConfig') }}
+          </a-menu-item>
+          <a-menu-item key="files">
+            <template #icon><folder-open-outlined /></template>
+            {{ t('system.fileMgmt') }}
+          </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="monitor">
-          <template #title>
-            <span>
-              <fund-outlined />
-              <span>{{ t('monitor.title') }}</span>
-            </span>
+          <template #icon>
+            <fund-outlined />
           </template>
+          <template #title>{{ t('monitor.title') }}</template>
           <a-menu-item key="server">{{ t('monitor.server') }}</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="job">
-          <template #title>
-            <span>
-              <calendar-outlined />
-              <span>{{ t('job.title') }}</span>
-            </span>
+          <template #icon>
+            <calendar-outlined />
           </template>
+          <template #title>{{ t('job.title') }}</template>
           <a-menu-item key="job-cron">{{ t('job.job') }}</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="audit">
-          <template #title>
-            <span>
-              <audit-outlined />
-              <span>{{ t('audit.title') }}</span>
-            </span>
+          <template #icon>
+            <audit-outlined />
           </template>
+          <template #title>{{ t('audit.title') }}</template>
           <a-sub-menu key="audit-log" :title="t('audit.log')">
             <a-menu-item key="audit-log-operation">{{ t('audit.operation') }}</a-menu-item>
             <a-menu-item key="audit-log-login">{{ t('audit.login') }}</a-menu-item>
@@ -75,27 +91,14 @@
           </a-sub-menu>
         </a-sub-menu>
         <a-sub-menu key="notice">
-          <template #title>
-            <span>
-              <bell-outlined />
-              <span>{{ t('notice.title') }}</span>
-            </span>
+          <template #icon>
+            <bell-outlined />
           </template>
+          <template #title>{{ t('notice.title') }}</template>
           <a-menu-item key="notice-message">{{ t('notice.message') }}</a-menu-item>
           <a-menu-item key="notice-manage">{{ t('notice.manage') }}</a-menu-item>
         </a-sub-menu>
       </a-menu>
-      
-      <div class="sider-footer">
-        <div class="system-status">
-          <span>{{ t('system.status.cpu') }}</span>
-          <a-progress :percent="45" :show-info="false" stroke-color="var(--color-primary)" :trail-color="themeStore.theme === 'dark' ? '#333' : '#e8e8e8'" size="small" />
-        </div>
-        <div class="system-status">
-          <span>{{ t('system.status.mem') }}</span>
-          <a-progress :percent="72" :show-info="false" stroke-color="var(--color-secondary)" :trail-color="themeStore.theme === 'dark' ? '#333' : '#e8e8e8'" size="small" />
-        </div>
-      </div>
     </a-layout-sider>
     
     <a-layout>
@@ -118,11 +121,16 @@
           </a-breadcrumb>
         </div>
         <div class="header-right">
-          <span class="theme-switch" @click="toggleTheme">
+          <span class="action-btn" @click="openNoticeDrawer">
+            <a-badge :count="noticeCount" :number-style="{ backgroundColor: 'var(--color-error)' }">
+              <bell-outlined style="color: var(--color-primary); font-size: 18px;" />
+            </a-badge>
+          </span>
+          <span class="theme-switch action-btn" @click="toggleTheme">
             <bulb-filled v-if="themeStore.theme === 'dark'" />
             <bulb-outlined v-else />
           </span>
-          <span class="locale-switch" @click="toggleLocale">
+          <span class="locale-switch action-btn" @click="toggleLocale">
             <global-outlined />
             <span style="margin-left: 5px; font-size: 12px">{{ locale === 'zh-CN' ? 'CN' : 'EN' }}</span>
           </span>
@@ -140,6 +148,69 @@
         <router-view />
       </a-layout-content>
     </a-layout>
+    
+    <!-- Notification Drawer -->
+    <a-drawer
+      v-model:visible="noticeDrawerVisible"
+      :title="t('notice.title')"
+      placement="right"
+      :width="350"
+      :closable="true"
+    >
+      <a-tabs v-model:activeKey="noticeTabKey">
+        <a-tab-pane key="all" :tab="t('common.all')">
+          <a-list item-layout="horizontal" :data-source="noticeList">
+            <template #renderItem="{ item }">
+              <a-list-item :class="{ 'read-notice': item.read }">
+                <a-list-item-meta
+                  :description="item.time"
+                >
+                  <template #title>
+                    <a href="javascript:;" @click="markAsRead(item)">{{ item.title }}</a>
+                  </template>
+                  <template #avatar>
+                    <a-avatar style="background-color: var(--color-primary)">
+                      <template #icon><bell-outlined /></template>
+                    </a-avatar>
+                  </template>
+                </a-list-item-meta>
+              </a-list-item>
+            </template>
+          </a-list>
+        </a-tab-pane>
+        <a-tab-pane key="unread" :tab="t('common.unread')">
+          <a-list item-layout="horizontal" :data-source="unreadNoticeList">
+            <template #renderItem="{ item }">
+              <a-list-item>
+                <a-list-item-meta
+                  :description="item.time"
+                >
+                  <template #title>
+                    <a href="javascript:;" @click="markAsRead(item)">{{ item.title }}</a>
+                  </template>
+                  <template #avatar>
+                    <a-avatar style="background-color: var(--color-error)">
+                      <template #icon><bell-outlined /></template>
+                    </a-avatar>
+                  </template>
+                </a-list-item-meta>
+              </a-list-item>
+            </template>
+          </a-list>
+        </a-tab-pane>
+      </a-tabs>
+      
+      <template #footer>
+        <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+          <a-button @click="markAllAsRead" type="primary" ghost size="small">
+            {{ t('notice.mark_all_read') }}
+          </a-button>
+          <a-button @click="goToNoticeMessage" size="small">
+            {{ t('notice.view_more') }}
+          </a-button>
+        </div>
+      </template>
+    </a-drawer>
   </a-layout>
 </template>
 
@@ -158,6 +229,15 @@ import {
   BellOutlined,
   CalendarOutlined,
   AuditOutlined,
+  UserOutlined,
+  TeamOutlined,
+  ApartmentOutlined,
+  MenuOutlined,
+  SafetyCertificateOutlined,
+  BookOutlined,
+  ToolOutlined,
+  FolderOpenOutlined,
+  SettingOutlined,
 } from '@ant-design/icons-vue';
 import dayjs from 'dayjs';
 import { useI18n } from 'vue-i18n';
@@ -169,6 +249,48 @@ const route = useRoute();
 const { t, locale } = useI18n();
 const themeStore = useThemeStore();
 const userStore = useUserStore();
+
+// Notification Drawer State and Mock Data
+const noticeDrawerVisible = ref(false);
+const noticeTabKey = ref('all');
+
+// Using ref so the mock data can be mutated and remain reactive
+const noticeData = ref([
+  { id: 1, titleKey: 'notice.update_v2_1', timeKey: 'notice.time_10m', read: false },
+  { id: 2, titleKey: 'notice.cpu_high', timeKey: 'notice.time_1h', read: false },
+  { id: 3, titleKey: 'notice.new_user', timeKey: 'notice.time_2h', read: false },
+  { id: 4, titleKey: 'notice.report_gen', timeKey: 'notice.time_1d', read: true },
+  { id: 5, titleKey: 'notice.pwd_expire', timeKey: 'notice.time_2d', read: true },
+]);
+
+// Computed property to translate the data on the fly while keeping the base state reactive
+const noticeList = computed(() => {
+  return noticeData.value.map(item => ({
+    ...item,
+    title: t(item.titleKey),
+    time: t(item.timeKey)
+  }));
+});
+
+const unreadNoticeList = computed(() => noticeList.value.filter(item => !item.read));
+const noticeCount = computed(() => unreadNoticeList.value.length);
+
+const openNoticeDrawer = () => {
+  noticeDrawerVisible.value = true;
+};
+
+const markAsRead = (item: any) => {
+  const targetIndex = noticeData.value.findIndex(n => n.id === item.id);
+  if (targetIndex !== -1) {
+    // Re-assign the specific item to trigger reactivity properly
+    noticeData.value[targetIndex] = { ...noticeData.value[targetIndex], read: true };
+  }
+};
+
+const markAllAsRead = () => {
+  // Re-assign the entire array to trigger reactivity
+  noticeData.value = noticeData.value.map(item => ({ ...item, read: true }));
+};
 
 const breadcrumbs = computed(() => {
   const matched = route.matched.filter((item) => item.meta && item.meta.title);
@@ -207,6 +329,11 @@ const toggleLocale = () => {
 
 const toggleTheme = () => {
   themeStore.toggleTheme();
+};
+
+const goToNoticeMessage = () => {
+  router.push('/notice/message');
+  selectedKeys.value = ['notice-message'];
 };
 
 const handleMenuClick = ({ key }: { key: string }) => {
@@ -307,8 +434,11 @@ onUnmounted(() => {
   border-right: 1px solid var(--color-border);
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
   z-index: 10;
+  display: flex;
+  flex-direction: column;
   
   .logo {
+    flex-shrink: 0;
     height: 64px;
     display: flex;
     align-items: center;
@@ -332,23 +462,18 @@ onUnmounted(() => {
     }
   }
   
-  .sider-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 20px;
-    border-top: 1px solid var(--color-border);
+  .layout-menu {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
     
-    .system-status {
-      margin-bottom: 10px;
-      
-      span {
-        display: block;
-        font-size: 10px;
-        color: var(--color-text-secondary);
-        margin-bottom: 2px;
-        font-family: var(--font-family-mono);
-      }
+    // Hide scrollbar for cleaner look
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(var(--color-primary), 0.3);
+      border-radius: 2px;
     }
   }
 }
@@ -405,21 +530,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
 
-    .theme-switch {
-      color: var(--color-primary);
-      cursor: pointer;
-      margin-right: 20px;
-      display: flex;
-      align-items: center;
-      transition: all 0.3s;
-      
-      &:hover {
-        text-shadow: var(--shadow-glow-primary);
-        transform: scale(1.1);
-      }
-    }
-
-    .locale-switch {
+    .action-btn {
       color: var(--color-primary);
       cursor: pointer;
       margin-right: 20px;
@@ -460,6 +571,13 @@ onUnmounted(() => {
         color: var(--color-text-base);
       }
     }
+  }
+}
+
+.read-notice {
+  opacity: 0.5;
+  .ant-list-item-meta-title > a {
+    color: var(--color-text-secondary) !important;
   }
 }
 
