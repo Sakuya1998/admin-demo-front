@@ -1,0 +1,57 @@
+// Cyber-Industrial Theme Variables
+
+// Colors
+@color-bg-base: #050505; // Deep Space
+@color-bg-panel: #0A0A0A; // Carbon
+@color-primary: #00F0FF; // Cyber Cyan
+@color-secondary: #7000FF; // Electric Purple
+@color-success: #00FF9D; // Neon Green
+@color-warning: #FFD600; // Industrial Yellow
+@color-error: #FF003C; // Crimson Red
+@color-text-base: #E0E0E0;
+@color-text-secondary: #888888;
+@color-border: rgba(0, 240, 255, 0.3);
+@color-border-hover: #00F0FF;
+
+// Typography
+@font-family-mono: 'Orbitron', 'Rajdhani', 'JetBrains Mono', monospace;
+@font-family-base: 'Inter', 'Roboto', sans-serif;
+
+// Borders
+@border-radius-base: 0px; // No rounded corners
+@border-width-base: 1px;
+
+// Shadows & Glows
+@shadow-glow-primary: 0 0 8px rgba(0, 240, 255, 0.5);
+@shadow-glow-text: 0 0 5px rgba(0, 240, 255, 0.8);
+
+// CSS Variables for runtime usage
+:root {
+  --color-bg-base: @color-bg-base;
+  --color-bg-panel: @color-bg-panel;
+  --color-primary: @color-primary;
+  --color-secondary: @color-secondary;
+  --color-success: @color-success;
+  --color-warning: @color-warning;
+  --color-error: @color-error;
+  --color-text-base: @color-text-base;
+  --color-text-secondary: @color-text-secondary;
+  --color-border: @color-border;
+  --font-family-mono: @font-family-mono;
+  --font-family-base: @font-family-base;
+  --shadow-glow-primary: @shadow-glow-primary;
+}
+
+[data-theme='light'] {
+  --color-bg-base: #FFFFFF;
+  --color-bg-panel: #F0F2F5;
+  --color-primary: #1677FF;
+  --color-secondary: #722ED1;
+  --color-success: #52C41A;
+  --color-warning: #FAAD14;
+  --color-error: #FF4D4F;
+  --color-text-base: #000000;
+  --color-text-secondary: #666666;
+  --color-border: #D9D9D9;
+  --shadow-glow-primary: 0 0 8px rgba(22, 119, 255, 0.2);
+}
