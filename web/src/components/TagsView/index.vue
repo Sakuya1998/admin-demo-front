@@ -187,7 +187,7 @@ onMounted(() => {
 .tags-view-container {
   height: 34px;
   width: 100%;
-  background: var(--color-bg-container);
+  background: var(--color-bg-panel);
   border-bottom: 1px solid var(--color-border);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
   
@@ -206,7 +206,7 @@ onMounted(() => {
       height: 26px;
       line-height: 26px;
       border: 1px solid var(--color-border);
-      color: var(--color-text);
+      color: var(--color-text-base);
       background: var(--color-bg-base);
       padding: 0 8px;
       font-size: 12px;
@@ -220,12 +220,12 @@ onMounted(() => {
       
       &.active {
         background-color: var(--color-primary);
-        color: #000;
+        color: #fff;
         border-color: var(--color-primary);
         
         &::before {
           content: '';
-          background: #000;
+          background: #fff;
           display: inline-block;
           width: 8px;
           height: 8px;
@@ -261,7 +261,7 @@ onMounted(() => {
   
   .contextmenu {
     margin: 0;
-    background: var(--color-bg-container);
+    background: var(--color-bg-panel);
     z-index: 3000;
     position: absolute;
     list-style-type: none;
@@ -269,7 +269,7 @@ onMounted(() => {
     border-radius: 4px;
     font-size: 12px;
     font-weight: 400;
-    color: var(--color-text);
+    color: var(--color-text-base);
     box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
     border: 1px solid var(--color-border);
     
@@ -280,7 +280,7 @@ onMounted(() => {
       
       &:hover {
         background: var(--color-primary);
-        color: #000;
+        color: #fff;
       }
     }
   }

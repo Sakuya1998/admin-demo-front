@@ -1,11 +1,12 @@
 <template>
-  <a-layout class="layout-container">
+  <a-layout class="layout-container" :data-theme="themeStore.theme">
     <a-layout-sider
       v-model:collapsed="collapsed"
       :trigger="null"
       collapsible
       class="layout-sider"
       width="240"
+      :theme="themeStore.theme === 'dark' ? 'dark' : 'light'"
     >
       <div class="logo">
         <span class="logo-icon">A</span>
@@ -13,7 +14,7 @@
       </div>
       <a-menu
         v-model:selectedKeys="selectedKeys"
-        theme="dark"
+        :theme="themeStore.theme === 'dark' ? 'dark' : 'light'"
         mode="inline"
         class="layout-menu"
         @click="handleMenuClick"
@@ -88,11 +89,11 @@
       <div class="sider-footer">
         <div class="system-status">
           <span>{{ t('system.status.cpu') }}</span>
-          <a-progress :percent="45" :show-info="false" stroke-color="#00F0FF" trail-color="#333" size="small" />
+          <a-progress :percent="45" :show-info="false" stroke-color="var(--color-primary)" :trail-color="themeStore.theme === 'dark' ? '#333' : '#e8e8e8'" size="small" />
         </div>
         <div class="system-status">
           <span>{{ t('system.status.mem') }}</span>
-          <a-progress :percent="72" :show-info="false" stroke-color="#7000FF" trail-color="#333" size="small" />
+          <a-progress :percent="72" :show-info="false" stroke-color="var(--color-secondary)" :trail-color="themeStore.theme === 'dark' ? '#333' : '#e8e8e8'" size="small" />
         </div>
       </div>
     </a-layout-sider>
@@ -127,7 +128,7 @@
           </span>
           <span class="time-display">{{ currentTime }}</span>
           <div class="user-profile">
-            <a-avatar size="small" style="background-color: #00F0FF; color: #000">A</a-avatar>
+            <a-avatar size="small" :style="{ backgroundColor: 'var(--color-primary)', color: '#fff' }">A</a-avatar>
             <span class="username">{{ userStore.username }}</span>
           </div>
         </div>
@@ -312,7 +313,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 240, 255, 0.05);
+    background: rgba(var(--color-primary), 0.05);
     border-bottom: 1px solid var(--color-border);
     
     .logo-icon {
@@ -336,7 +337,7 @@ onUnmounted(() => {
     bottom: 0;
     width: 100%;
     padding: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--color-border);
     
     .system-status {
       margin-bottom: 10px;
@@ -358,7 +359,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--color-border);
   height: 64px;
   
   .header-left {
@@ -450,7 +451,7 @@ onUnmounted(() => {
       
       &:hover {
         border-color: var(--color-primary);
-        background: rgba(0, 240, 255, 0.05);
+        background: rgba(var(--color-primary), 0.05);
       }
       
       .username {
@@ -477,8 +478,8 @@ onUnmounted(() => {
     width: 100%;
     height: 100%;
     background-image: 
-      linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(var(--color-primary), 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--color-primary), 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none;
     z-index: 0;

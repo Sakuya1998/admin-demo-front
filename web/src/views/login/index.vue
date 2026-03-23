@@ -132,13 +132,13 @@ const onFinishFailed = (errorInfo: any) => {
   
   .login-box {
     width: 400px;
-    background: rgba(10, 10, 10, 0.9);
+    background: var(--color-bg-panel);
     border: 1px solid var(--color-border);
     padding: 40px;
     position: relative;
     z-index: 10;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     
     // Chamfered corners visual
     &::before {
@@ -167,7 +167,7 @@ const onFinishFailed = (errorInfo: any) => {
         font-size: 48px;
         color: var(--color-primary);
         font-family: var(--font-family-mono);
-        text-shadow: 0 0 10px var(--color-primary);
+        text-shadow: var(--shadow-glow-primary);
         margin-bottom: 10px;
       }
       
@@ -208,11 +208,11 @@ const onFinishFailed = (errorInfo: any) => {
       margin-top: 30px;
       display: flex;
       justify-content: space-between;
-      border-top: 1px solid #333;
+      border-top: 1px solid var(--color-border);
       padding-top: 15px;
       font-size: 10px;
       font-family: var(--font-family-mono);
-      color: #666;
+      color: var(--color-text-secondary);
     }
   }
 }
